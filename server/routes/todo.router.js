@@ -29,6 +29,18 @@ router.post('/', (req, res) => {
 });
 
 // PUT
+router.put('/:id', (req, res) => {
+    console.log('In PUT request for /todo');
+    let taskId = req.params.id;
+    let taskToEdit = req.body;
+    let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
+    pool.query(queryText, [taskToEdit.complete, taskId]).then((result) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log(`Error in PUT ${error}`);
+        res.sendStatus(500);
+    });
+});
 
 // DELETE
 
