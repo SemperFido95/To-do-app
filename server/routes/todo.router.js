@@ -13,7 +13,20 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     });
 });
+
 // POST
+router.post('/', (req, res) => {
+    console.log('POST request made for /todo');
+    let taskToAdd = req.body;
+    let queryText = `INSERT INTO tasks (task)
+        VALUES ($1);`;
+    pool.query(queryText, [taskToAdd.task]).then((result) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log(`Error in POST ${error}`);
+        res.sendStatus(500);
+    });
+});
 
 // PUT
 
