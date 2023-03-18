@@ -21,3 +21,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+header {
+  text-align: center;
+  background-color: azure;
+  border: none;
+  color: #61dafb;
+  padding: 12px 32px;
+}
+
+h1, h2 {
+  color: cornflowerblue;
+}
+
+#spacer {
+  border-bottom: 1px solid black;
+}

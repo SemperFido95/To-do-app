@@ -1,10 +1,13 @@
-import {useState} from 'react';
+import './App.css';
+import Header from '../Header/Header';
+import List from '../List/List';
 
 function App () {
   
   return (
     <div>
-      <h1>TO DO APP</h1>
+      <Header />
+      <List />
     </div>
   );
 
