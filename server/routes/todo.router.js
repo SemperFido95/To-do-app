@@ -5,7 +5,7 @@ const pool = require('../modules/pool.js');
 // GET
 router.get('/', (req, res) => {
     console.log('GET request made for /todo');
-    let queryText = 'SELECT * FROM tasks;';
+    let queryText = 'SELECT * FROM tasks ORDER BY complete, task;';
     pool.query(queryText).then((result) => {
         res.send(result.rows);
     }).catch((error) => {
@@ -32,14 +32,25 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     console.log('In PUT request for /todo');
     let taskId = req.params.id;
-    let taskToEdit = req.body;
-    let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
-    pool.query(queryText, [taskToEdit.complete, taskId]).then((result) => {
-        res.sendStatus(201);
-    }).catch((error) => {
-        console.log(`Error in PUT ${error}`);
-        res.sendStatus(500);
-    });
+    let taskToEdit = req.body.complete;
+    // let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
+    if (taskToEdit === true) {
+        let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
+        pool.query(queryText, [taskToEdit, taskId]).then((result) => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log(`Error in PUT ${error}`);
+            res.send`Status(500);
+        });
+    } else {
+        let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
+        pool.query(queryText, [taskToEdit, taskId]).then((result) => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log(`Error in PUT ${error}`);
+            res.sendStatus(500);
+        });
+    }
 });
 
 // DELETE
