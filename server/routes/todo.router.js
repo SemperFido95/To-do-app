@@ -40,7 +40,7 @@ router.put('/:id', (req, res) => {
             res.sendStatus(201);
         }).catch((error) => {
             console.log(`Error in PUT ${error}`);
-            res.send`Status(500);
+            res.sendStatus(500);
         });
     } else {
         let queryText = `UPDATE tasks SET complete = $1 WHERE id = $2;`;
@@ -57,6 +57,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     console.log('In DELETE request for /todo');
     let deleteId = req.params.id;
+    console.log(deleteId);
     let queryText = 'DELETE FROM tasks WHERE id = $1;';
     pool.query(queryText, [deleteId]).then((result) => {
         res.sendStatus(200);

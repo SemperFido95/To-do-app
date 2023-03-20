@@ -55,6 +55,13 @@ function List() {
         })
     }
 
+    const removeTask = (id) => {
+        axios.delete(`todo/${id}`).then((response) => {
+            console.log(response);
+            showTasks();
+        })
+    }
+
     return (
         <div id="list">
             <form onSubmit={submitForm}>
@@ -71,7 +78,7 @@ function List() {
                              {/* onChange={markComplete(task.id)} */}
                             {task.task}
                             {/* <button>Mark Commplete</button> */}
-                            <button>Remove</button>
+                            <button onClick={(event) => removeTask(task.id)}>Remove</button>
                         </li>
                     ))
                 }
