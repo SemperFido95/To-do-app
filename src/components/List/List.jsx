@@ -18,7 +18,7 @@ function List() {
         showTasks();
     }, []);
 
-    const submitForm = event => {
+    const submitForm = () => {
         axios.post('./todo', {task: newTask}).then((response) => {
             console.log('in POST request');
             setNewTask('');
@@ -63,9 +63,7 @@ function List() {
                     taskList.map((task) => (
                         <li key={task.id}>
                             <input id={task.id} value={newTask} type="checkbox" defaultChecked={task.complete} onChange={(event) => markComplete(event, task.id)}/>
-                             {/* onChange={markComplete(task.id)} */}
-                            <p id={'task' + task.id} className={task.complete === true ? 'complete' : ''}>{task.task}</p>
-                            {/* <button>Mark Commplete</button> */}
+                            <p className={task.complete === true ? 'complete' : ''}>{task.task}</p>
                             <button className="remove" onClick={() => removeTask(task.id)}>Remove</button>
                         </li>
                     ))
