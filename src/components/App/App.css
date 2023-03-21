@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: cornflowerblue;
   height: 70px;
   padding: 20px;
   color: white;
@@ -24,16 +24,39 @@
 
 header {
   text-align: center;
-  background-color: azure;
+  background-color: cornflowerblue;
   border: none;
-  color: #61dafb;
+  color: black;
   padding: 12px 32px;
 }
 
 h1, h2 {
-  color: cornflowerblue;
+  color: azure;
 }
 
 #spacer {
   border-bottom: 1px solid black;
+}
+
+li {
+  display: flex;
+}
+
+button {
+  margin-left: auto;
+}
+
+#list {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+#new {
+  margin-right: 5%;
+}
+
+li {margin: 10px 0;}
+
+form {
+  margin-top: 5%;
 }
