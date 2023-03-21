@@ -19,7 +19,6 @@ function List() {
     }, []);
 
     const submitForm = event => {
-        event.preventDefault();
         axios.post('./todo', {task: newTask}).then((response) => {
             console.log('in POST request');
             setNewTask('');
@@ -33,12 +32,8 @@ function List() {
     const markComplete = (event) => {
         let status = event.target.checked;
         let id = Number(event.target.id);
-        let completeObject = {}
-        if (status === true) {
-            completeObject.complete = true;
-        } else {
-            completeObject.complete = false;
-        }
+        let completeObject = {};
+        status === true ? completeObject.complete = true : completeObject.complete = false;
         axios.put(`/todo/${id}`, completeObject).then((response) => {
             console.log(response);
             showTasks();
@@ -58,8 +53,7 @@ function List() {
     return (
         <div id="list">
             <form onSubmit={submitForm}>
-                {/* <label>New Task:</label> */}
-                <input id="new" placeholder="Submit New Task" type="text" onChange={(event) => setNewTask(event.target.value)} />
+                New Task: <input id="new" type="text" onChange={(event) => setNewTask(event.target.value)} />
                 <button>Submit</button>
         </form>
             <h2>Tasks</h2>
@@ -68,11 +62,11 @@ function List() {
                 {
                     taskList.map((task) => (
                         <li key={task.id}>
-                            <input id={task.id} type="checkbox" defaultChecked={task.complete} onChange={(event) => markComplete(event, task.id)}/>
+                            <input id={task.id} value={newTask} type="checkbox" defaultChecked={task.complete} onChange={(event) => markComplete(event, task.id)}/>
                              {/* onChange={markComplete(task.id)} */}
-                            {task.task}
+                            <p id={'task' + task.id} className={task.complete === true ? 'complete' : ''}>{task.task}</p>
                             {/* <button>Mark Commplete</button> */}
-                            <button className="remove" onClick={(event) => removeTask(task.id)}>Remove</button>
+                            <button className="remove" onClick={() => removeTask(task.id)}>Remove</button>
                         </li>
                     ))
                 }

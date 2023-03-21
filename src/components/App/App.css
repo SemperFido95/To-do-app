@@ -30,8 +30,12 @@ header {
   padding: 12px 32px;
 }
 
-h1, h2 {
+h1 {
   color: azure;
+}
+
+h2 {
+  color: cornflowerblue;
 }
 
 #spacer {
@@ -40,6 +44,7 @@ h1, h2 {
 
 li {
   display: flex;
+  margin: 10px 0;
 }
 
 button {
@@ -52,11 +57,19 @@ button {
 }
 
 #new {
-  margin-right: 5%;
+  margin: 0 5%;
 }
-
-li {margin: 10px 0;}
 
 form {
   margin-top: 5%;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.complete {
+  text-decoration: line-through;
+  color: gray;
 }
