@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import NewTask from "../NewTask/NewTask";
+import CompleteTask from "./CompleteTask";
 
 function List() {
     const [taskList, getTasks] = useState([]);
@@ -18,31 +20,6 @@ function List() {
         showTasks();
     }, []);
 
-    const submitForm = () => {
-        axios.post('./todo', {task: newTask}).then((response) => {
-            console.log('in POST request');
-            setNewTask('');
-            showTasks();
-        }).catch((error) => {
-            console.log(`Error in POST ${error}`);
-            alert('Something went wrong.');
-        })
-    }
-
-    const markComplete = (event) => {
-        let status = event.target.checked;
-        let id = Number(event.target.id);
-        let completeObject = {};
-        status === true ? completeObject.complete = true : completeObject.complete = false;
-        axios.put(`/todo/${id}`, completeObject).then((response) => {
-            console.log(response);
-            showTasks();
-        }).catch((error) => {
-            console.log(`Error in PUT ${error}`);
-            alert('Something went wrong');
-        })
-    }
-
     const removeTask = (id) => {
         axios.delete(`todo/${id}`).then((response) => {
             console.log(response);
@@ -52,19 +29,22 @@ function List() {
 
     return (
         <div id="list">
-            <form onSubmit={submitForm}>
-                New Task: <input id="new" type="text" onChange={(event) => setNewTask(event.target.value)} />
-                <button>Submit</button>
-        </form>
+            <NewTask 
+                newTask={newTask}
+                setNewTask={setNewTask}
+            />
             <h2>Tasks</h2>
             <div id="spacer"></div>
             <ul>
                 {
                     taskList.map((task) => (
                         <li key={task.id}>
-                            <input id={task.id} value={newTask} type="checkbox" defaultChecked={task.complete} onChange={(event) => markComplete(event, task.id)}/>
-                            <p className={task.complete === true ? 'complete' : ''}>{task.task}</p>
-                            <button className="remove" onClick={() => removeTask(task.id)}>Remove</button>
+                            <CompleteTask 
+                                task={task}
+                                newTask={newTask}
+                                showTasks={showTasks}
+                            />
+                            <button style={{cursor: 'pointer'}} className="remove" onClick={() => removeTask(task.id)}>Remove</button>
                         </li>
                     ))
                 }

@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+* {
+  box-sizing: border-box;
+} 
 
 .App-header {
   background-color: cornflowerblue;
@@ -45,23 +48,39 @@ h2 {
 li {
   display: flex;
   margin: 10px 0;
+  border-bottom: 1px dotted black;
+  align-items: flex-end;
 }
 
-button {
+.remove {
+  margin-left: auto;
+  border-radius: 10%;
+  height: 25px;
+  background-color: rgb(255, 9, 9);
+}
+
+form button {
+  border-radius: 10%;
   margin-left: auto;
 }
 
 #list {
-  max-width: 50%;
+  max-width: 40%;
   margin: 0 auto;
 }
 
-#new {
-  margin: 0 5%;
+form {
+  display: grid;
+  padding: 10px 0;
+  margin: 10px 0;
+  grid-template-columns: auto 67% auto;
 }
 
-form {
-  margin-top: 5%;
+form p {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: flex-end;
 }
 
 ul {
@@ -72,4 +91,14 @@ ul {
 .complete {
   text-decoration: line-through;
   color: gray;
+}
+
+#completeDiv {
+  display: flex;
+  align-items: flex-end;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
