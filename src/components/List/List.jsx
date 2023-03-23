@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import NewTask from "../NewTask/NewTask";
+import NewTask from "./NewTask";
 import CompleteTask from "./CompleteTask";
+import RemoveTask from "./RemoveTask";
 
 function List() {
     const [taskList, getTasks] = useState([]);
@@ -20,12 +21,7 @@ function List() {
         showTasks();
     }, []);
 
-    const removeTask = (id) => {
-        axios.delete(`todo/${id}`).then((response) => {
-            console.log(response);
-            showTasks();
-        })
-    }
+    
 
     return (
         <div id="list">
@@ -44,7 +40,10 @@ function List() {
                                 newTask={newTask}
                                 showTasks={showTasks}
                             />
-                            <button style={{cursor: 'pointer'}} className="remove" onClick={() => removeTask(task.id)}>Remove</button>
+                            <RemoveTask
+                                task={task}
+                                showTasks={showTasks}
+                            />
                         </li>
                     ))
                 }
